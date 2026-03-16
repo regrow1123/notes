@@ -9,13 +9,6 @@ pre{background:#111827;padding:10px;border-radius:6px;overflow-x:auto}
 code{font-size:12px}
 </style></head><body>
 <div class="a">[tool: exec]</div>
-<div class="a">이제 3초마다 `/api/state` 확인해서:<br>```<br>running=true  → LIVE<br>running=false + 데이터 있음 → ENDED<br>running=false + 데이터 없음 → READY<br>```<br><br>새로고침해봐.</div>
-<div class="u">Conversation info (untrusted metadata):<br>```json<br>{<br>  "message_id": "1889",<br>  "sender_id": "8645727550",<br>  "sender": "성제 장",<br>  "timestamp": "Mon 2026-03-16 06:43 GMT+9"<br>}<br>```<br><br>Sender (untrusted metadata):<br>```json<br>{<br>  "label": "성제 장 (8645727550)",<br>  "id": "8645727550",<br>  "name": "성제 장"<br>}<br>```<br><br>ended 필요 없다</div>
-<div class="a">[tool: edit]</div>
-<div class="a">[tool: exec]</div>
-<div class="a">완료.</div>
-<div class="u">Conversation info (untrusted metadata):<br>```json<br>{<br>  "message_id": "1891",<br>  "sender_id": "8645727550",<br>  "sender": "성제 장",<br>  "timestamp": "Mon 2026-03-16 06:44 GMT+9"<br>}<br>```<br><br>Sender (untrusted metadata):<br>```json<br>{<br>  "label": "성제 장 (8645727550)",<br>  "id": "8645727550",<br>  "name": "성제 장"<br>}<br>```<br><br>ready 말고 standby 어때?</div>
-<div class="a">[tool: exec]</div>
 <div class="a">완료.</div>
 <div class="u">Conversation info (untrusted metadata):<br>```json<br>{<br>  "message_id": "1893",<br>  "sender_id": "8645727550",<br>  "sender": "성제 장",<br>  "timestamp": "Mon 2026-03-16 06:45 GMT+9"<br>}<br>```<br><br>Sender (untrusted metadata):<br>```json<br>{<br>  "label": "성제 장 (8645727550)",<br>  "id": "8645727550",<br>  "name": "성제 장"<br>}<br>```<br><br>running인지 아닌지만 마커표시하면된다. 너 의견은?</div>
 <div class="a">동의. 마커 색상으로 충분:<br><br>```<br>초록: running<br>회색: not running<br>```<br><br>텍스트도 필요 없음. 색상 점 하나면 됨.<br>[tool: edit]</div>
@@ -108,4 +101,11 @@ code{font-size:12px}
 <div class="a">**GitHub 읽기가 가능하면 됨.**<br><br>```<br>방법:<br>  sunday-desktop에서 GitHub에 push (가능)<br>  → 회사 PC에서 GitHub 읽기 (가능)<br>```<br><br>대화 내용을 GitHub repo에 주기적으로 push → 회사 PC에서 GitHub 웹으로 열람:<br>[tool: write]</div>
 <div class="a">[tool: exec]</div>
 <div class="a">[tool: exec]</div>
+<div class="a">[tool: exec]</div>
+<div class="a">완료. 5분마다 대화 내용이 GitHub에 자동 push.<br><br>회사 PC에서: **https://regrow1123.github.io/notes/**<br><br>GitHub Pages라서 1~2분 후 반영. 접속해봐.</div>
+<div class="u">Conversation info (untrusted metadata):<br>```json<br>{<br>  "message_id": "1965",<br>  "sender_id": "8645727550",<br>  "sender": "성제 장",<br>  "timestamp": "Mon 2026-03-16 12:23 GMT+9"<br>}<br>```<br><br>Sender (untrusted metadata):<br>```json<br>{<br>  "label": "성제 장 (8645727550)",<br>  "id": "8645727550",<br>  "name": "성제 장"<br>}<br>```<br><br>된다. 아까는 왜 안됬었지?</div>
+<div class="a">아까는 JS fetch로 `chat.sund4y1123.com`을 브라우저에서 호출하는 방식 → Cloudflare Access 인증 + CORS 문제.<br><br>지금은 서버(sunday-desktop)에서 HTML 생성 → GitHub에 push → 정적 파일 열람. 외부 API 호출 없이 순수 HTML만 읽는 거라 아무 문제 없음.<br><br>```<br>아까: 브라우저 → JS fetch → chat.sund4y1123.com → 실패<br>지금: sunday-desktop → HTML 생성 → GitHub push → 브라우저는 github.io만 읽기<br>```</div>
+<div class="u">Conversation info (untrusted metadata):<br>```json<br>{<br>  "message_id": "1967",<br>  "sender_id": "8645727550",<br>  "sender": "성제 장",<br>  "timestamp": "Mon 2026-03-16 12:24 GMT+9"<br>}<br>```<br><br>Sender (untrusted metadata):<br>```json<br>{<br>  "label": "성제 장 (8645727550)",<br>  "id": "8645727550",<br>  "name": "성제 장"<br>}<br>```<br><br>아 보안이 없구나!</div>
+<div class="a">맞다. `regrow1123.github.io/notes/`는 public repo라 누구나 볼 수 있음.<br><br>**방법 1: private repo + GitHub Pages (Pro 필요)**<br>```<br>GitHub Pro ($4/월) → private repo에서도 Pages 가능<br>→ 근데 URL은 여전히 공개 접근 가능<br>```<br><br>**방법 2: 내용 암호화**<br>```<br>HTML을 암호화해서 push<br>→ 접속 시 비밀번호 입력 → JS로 복호화 → 렌더링<br>→ 소스는 public이지만 내용은 못 읽음<br>```<br><br>방법 2가 무료 + 보안 둘 다 해결:<br><br>```<br>sync 시:<br>  대화 내용 → AES 암호화 → GitHub push<br>  <br>열람 시:<br>  github.io 접속 → 비밀번호 입력 → 복호화 → 표시<br>```<br><br>적용할까?</div>
+<div class="u">Conversation info (untrusted metadata):<br>```json<br>{<br>  "message_id": "1969",<br>  "sender_id": "8645727550",<br>  "sender": "성제 장",<br>  "timestamp": "Mon 2026-03-16 12:24 GMT+9"<br>}<br>```<br><br>Sender (untrusted metadata):<br>```json<br>{<br>  "label": "성제 장 (8645727550)",<br>  "id": "8645727550",<br>  "name": "성제 장"<br>}<br>```<br><br>해보자</div>
 <script>window.scrollTo(0,document.body.scrollHeight)</script></body></html>
